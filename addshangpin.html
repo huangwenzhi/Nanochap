@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+    <title>添加商品</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+</head>
+
+<body class="gray-bg">
+<div class="container-fluid">
+    <div class="side-body">
+        <div class="page-title">
+            <span class="shangpin_title">添加商品</span>
+        </div>
+        <div class="name-title">
+            <label class="name-left title-name">
+                <span class="icons">*</span>商品名称 ：
+                <input type="text" name="" id="trade_name" value="" placeholder=""/>
+            </label>
+            <br>
+            <br>
+            <label class="name-left left-table _title title-name">
+                <span class="icons ">*</span>小 标 题 &nbsp;：&nbsp;&nbsp;
+                <input type="text" name="" id="cros" value="" placeholder=""/>
+            </label>
+        </div>
+        <br clear="all" />
+        <div class="goods-sku">
+            <div class="name-left title-name">
+                <span class="icons">*</span>商品SKU ：
+            </div>
+
+            <div class="name-left left-table">
+                <table class="table table-bordered table-hover table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th>商品图片</th>
+                            <th>商品货号</th>
+                            <!--<th>型号</th>-->
+                            <th>单价</th>
+                            <th>库存</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="img/a2.jpg" alt="" class="img">
+                            </td>
+                            <td>4868</td>
+                            <td>8468</td>
+                            <td>65465</td>
+                            <td>
+                                <button class="btnBianji">编辑</button>
+                                <button class="del">删除</button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="sp_sku">
+
+                    </tbody>
+                </table>
+                <button class="btn-success" data-toggle="modal" data-target="#myModal-sku">添加SKU</button>
+            </div>
+        </div>
+
+        <br clear="all" />
+        <div class="goods-detail">
+            <div class="name-left title-name">
+                <span class="icons">*</span>商品卖点 ：
+            </div>
+
+            <textarea name="" rows="10" cols="100%" id="selling_point"></textarea>
+        </div>
+        <br clear="all" />
+
+        <div id="bjqueding" style="margin: 0;display: inline;">
+            <input type="button" name="Submit" value="返回" class="btn btn-info" style="margin-right: 50px;" onclick="javascript:history.go(-1)" />
+            <!--<button id="bjqx" class="btn btn-info" style="margin-right: 50px;">取消</button>-->
+            <button id="bjfabu" class="btn btn-info">发布</button>
+        </div>
+    </div>
+    <!--添加sku模态框-->
+    <div class="modal fade" id="myModal-sku" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 900px;">
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th>商品图片</th>
+                                <th>商品货号</th>
+                                <!--<th>型号</th>-->
+                                <th>单价</th>
+                                <th>库存</th>
+                            </tr>
+                        </thead>
+                        <tbody id="add_sku_content">
+                            <tr style="text-align: center;vertical-align: middle;">
+                                <td>
+                                    <div id="imagePreview"></div>
+                                    <input id="imageInput" type="file" name="myPhoto" onchange="loadImageFile();" />
+                                </td>
+                                <td><input type="number" class="sku_skuNo" /></td>
+                                <td><input type="number" class="sku_price" /></td>
+                                <td><input type="number" class="sku_storeNums" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="add_sku_cancel">取消</button>
+                    <button type="button" class="btn btn-primary" id="add_sku">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js"></script>
+
+<script>
+  $(".del").on("click",function(){
+    if(confirm("确认删除吗")){
+      $(this).parents('tr').remove();
+    }
+  })
+    //模态框图片设置
+    var loadImageFile = (function() {
+        if(window.FileReader) {
+          var oPreviewImg = null,
+            oFReader = new window.FileReader(),
+            rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+          oFReader.onload = function(oFREvent) {
+            if(!oPreviewImg) {
+              var newPreview = document.getElementById("imagePreview");
+              oPreviewImg = new Image();
+              oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
+              oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
+              newPreview.appendChild(oPreviewImg);
+            }
+            oPreviewImg.src = oFREvent.target.result;
+          };
+          return function() {
+            var aFiles = document.getElementById("imageInput").files;
+            if(aFiles.length === 0) { return; }
+            if(!rFilter.test(aFiles[0].type)) { alert("You must select a valid image file!"); return; }
+            oFReader.readAsDataURL(aFiles[0]);
+          }
+        }
+        if(navigator.appName === "Microsoft Internet Explorer") {
+          return function() {
+            alert(document.getElementById("imageInput").value);
+            document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
+          }
+        }
+    })();
+    //点击取消按钮隐藏模态框
+    $("#add_sku_cancel").on("click",function(){
+      $('#myModal-sku').modal('hide')
+    })
+    //编辑
+    $(".btnBianji").on("click",function(){
+
+    })
+    //发布
+    $("#bjfabu").on("click",function(){
+
+    })
+
+//  添加模态框的内容到页面
+$(function(){
+  $("#add_sku").on('click',function(){
+    if($("#add_sku_content input").val()==""&&$("#imagePreview").val()==""){
+      alert("不能为空")
+    }else{
+      //创建tr节点
+      var $tr=$('<tr></tr>')
+      //遍历获取input中的内容依次填到td中
+      //第一个参数是索引，第二个参数是数据对象
+      //如果是json格式的话，第一个参数是键，第二个是值
+      $('form input').each(function(index,domEle){
+        //添加td节点
+        var $td=$('<td></td>');
+        //将内容循环添加到创建好的td中
+        $td.append($(domEle).val());
+        //将td添加到创建的tr中
+        $td.appendTo($tr);
+      });
+
+      // 获取图片路径
+      var imageInput = $("#imagePreview img").attr("src")
+      // 获取input输入框的输入值
+      var sku_skuNo = $(".sku_skuNo").val();
+      var sku_price = $(".sku_price").val();
+      var sku_storeNums = $(".sku_storeNums").val();
+      //创建td的删除更新按钮
+      var $td=$("<td><img src='"+imageInput+"' alt='' class='img'></td><td>"+sku_skuNo+"</td><td>"+sku_price+"</td><td>"+sku_storeNums+"</td> <td><button class='bianji'>编辑</button><button class='del'>删除</button></td>");
+      $td.appendTo($tr);
+      //最后将创建的tr插入到table中的最后一个位置
+      $tr.appendTo('#sp_sku');
+      // 清空input框的内容
+      $("#add_sku_content input").val("")
+//  删除
+      $(".del").on("click",function(){
+        if(confirm("确认删除吗")){
+          $(this).parents('tr').remove();
+        }
+      })
+//      编辑
+
+
+    }
+  })
+})
+
+</script>
+</body>
+
+</html>

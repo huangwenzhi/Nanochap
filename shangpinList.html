@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+
+
+    <title>商品列表</title>
+
+    <!--<link rel="shortcut icon" href="favicon.ico">-->
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div>
+        <div class="container-fluid">
+            <div class="side-body">
+                <div class="SPlist">
+                    <h3>商品管理———<span class="addSp">商品列表</span></h3>
+                </div>
+                <button id="add_html" onclick="window.location.href='AddSP.html'" class="btn btn-info btn_tianjia">
+                    添加
+                </button>
+                <!--列表-->
+                <table class="table table-bordered table-hover table-striped aa">
+                    <thead>
+                        <tr>
+                            <th>缩略图</th>
+                            <th>商品名称</th>
+                            <th>副标题</th>
+                            <th>单价</th>
+                            <th>库存</th>
+                            <th>操作</th>
+                            <th>产品中心</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="text-align: center;">
+                            <td><img src="http://image.newsite.nanochap.cn/nanochapoffcial/item/20171227/fc5596fa-f8e5-4d5b-8154-8f8088d887cf.png" style="max-width: 100px;max-height: 80px;"/></td>
+                            <td>NanoSooz 舒心贴</td>
+                            <td>智能疼痛缓解助手</td>
+                            <td>¥299</td>
+                            <td>285</td>
+                            <td><a href="shangpinbianji.html">编辑</a>
+                                <a class="delete-goods" data-id="6">删除</a></td>
+                            <td><a href="chanpinbianji.html">编辑</a>
+                                <a href="xiangqing.html">查看</a></td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td><img src="http://image.newsite.nanochap.cn/nanochapoffcial/item/20171227/fc5596fa-f8e5-4d5b-8154-8f8088d887cf.png" style="max-width: 100px;max-height: 80px;"/></td>
+                            <td>NanoSooz 舒心贴</td>
+                            <td>智能疼痛缓解助手</td>
+                            <td>¥299</td>
+                            <td>285</td>
+                            <td><a href="shangpinbianji.html">编辑</a>
+                                <a class="delete-goods" data-id="6">删除</a></td>
+                            <td><a href="chanpinbianji.html">编辑</a>
+                                <a href="xiangqing.html">查看</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<input type="file" id="exampleInputFile">-->
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+
+    <!-- 自定义js -->
+    <!--<script src="js/content.js"></script>-->
+
+    <script>
+      //删除商品
+      $("tbody").on("click", ".delete-goods", function() {
+        $(".delete-goods").click(function(){
+          if(confirm("确定要删除吗？？？")){
+            $(this).parent("tbody td").parent('tbody tr').remove();//移除当前的元素
+          }
+        });
+      });
+    </script>
+</body>
+
+</html>

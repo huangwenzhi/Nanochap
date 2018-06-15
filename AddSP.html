@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加商品</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/basic.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/dropzone.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/addshangping.css">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="addTitle">
+            <h3>商品管理———<span class="addSp">添加商品</span></h3>
+        </div>
+        <hr>
+        <div class="addMain">
+            <ul>
+                <li>
+                    <div class="SPtitle">商品名称</div>
+                    <div class="Input"><input type="text"></div>
+                </li>
+                <li>
+                    <div class="SPtitle">副标题</div>
+                    <div class="Input"><input type="text"></div>
+                </li>
+                <li>
+                    <div class="SPtitle">商品单价</div>
+                    <div class="Input"><input type="number"></div>
+                </li>
+                <li>
+                    <div class="SPtitle">商品图片</div>
+                    <div class="InputImg">
+                        <div id="imagePreview"></div>
+                        <input id="imageInput" type="file" name="myPhoto" onchange="loadImageFile();" />
+                    </div>
+                </li>
+                <li>
+                    <div class="SPtitle">商品库存</div>
+                    <div class="Input"><input type="number"></div>
+                </li>
+                <li>
+                    <div class="SPtitle">商品卖点</div>
+                    <div class="Input">
+                        <textarea name="" rows="10" cols="100%" id="selling_point"></textarea>
+                    </div>
+                </li>
+                <div id="bjqueding" style="margin: 0;display: inline;">
+                    <input type="button" name="Submit" value="取消" class="btn btn-info" style="margin-right: 50px;" onclick="javascript:history.go(-1)" />
+                    <button id="bjfabu" class="btn btn-info">发布</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <!-- DROPZONE -->
+    <script src="js/plugins/dropzone/dropzone.js"></script>
+
+    <script>
+      var loadImageFile = (function() {
+        if(window.FileReader) {
+          var oPreviewImg = null,
+            oFReader = new window.FileReader(),
+            rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+          oFReader.onload = function(oFREvent) {
+            if(!oPreviewImg) {
+              var newPreview = document.getElementById("imagePreview");
+              oPreviewImg = new Image();
+              oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
+              oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
+              newPreview.appendChild(oPreviewImg);
+            }
+            oPreviewImg.src = oFREvent.target.result;
+          };
+          return function() {
+            var aFiles = document.getElementById("imageInput").files;
+            if(aFiles.length === 0) { return; }
+            if(!rFilter.test(aFiles[0].type)) { alert("You must select a valid image file!"); return; }
+            oFReader.readAsDataURL(aFiles[0]);
+          }
+        }
+        if(navigator.appName === "Microsoft Internet Explorer") {
+          return function() {
+            alert(document.getElementById("imageInput").value);
+            document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
+          }
+        }
+      })();
+    </script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>
